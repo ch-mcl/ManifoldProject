@@ -1514,7 +1514,292 @@ namespace Manifold.EditorTools.GC.GFZ
 
         public static class PortTown
         {
+            const string baseName = "por_";
 
+            public static GcmfTemplate[] Road()
+            {
+                return new GcmfTemplate[]
+                {
+                    RoadTop(),
+                };
+            }
+
+            public static GcmfTemplate RoadTop()
+            {
+                // ST07 road1 submesh 0, tevs 0
+                var tevLayers = new TevLayer[]
+                {
+                    new TevLayer()
+                    {
+                        MipmapSetting = MipmapSetting.ENABLE_MIPMAP | MipmapSetting.UNK_FLAG_1 | MipmapSetting.UNK_FLAG_2,
+                        WrapMode = TextureWrapMode.mirrorX | TextureWrapMode.mirrorY | TextureWrapMode.unk6 | TextureWrapMode.unk7,
+                        LodBias = -10,
+                        AnisotropicFilter = GXAnisotropy.GX_ANISO_4,
+                        Unk0x12 = TexFlags0x10.unk4 | TexFlags0x10.unk5,
+                    },
+                };
+                var textureHashes = new string[]
+                {
+                    "cfa92b19ae0fcbc9fd5d3bac129dd14c", // st07 tex 75
+                };
+                var material = new Material
+                {
+                    MaterialColor = new GXColor(0xffffffff),
+                    AmbientColor = new GXColor(0xffffffff),
+                    SpecularColor = new GXColor(0x00000000),
+                    Unk0x10 = 0,
+                    Alpha = 255,
+                    UnkAlpha0x14 = -1,
+                };
+                var submesh = new Submesh()
+                {
+                    RenderFlags = 0,
+                    Material = material,
+                    UnkAlphaOptions = new UnkAlphaOptions(),
+                };
+                var template = new GcmfTemplate()
+                {
+                    Name = baseName + nameof(RoadTop),
+                    IsTranslucid = false,
+                    Submesh = submesh,
+                    TevLayers = tevLayers,
+                    TextureHashes = textureHashes,
+                    TextureScrollFields = null,
+                };
+
+                return template;
+            }
+
+            public static GcmfTemplate CurbSlope()
+            {
+                // ST07 road1 submesh 0, tevs 1
+                var tevLayers = new TevLayer[]
+                {
+                    new TevLayer()
+                    {
+                        MipmapSetting = MipmapSetting.ENABLE_MIPMAP | MipmapSetting.UNK_FLAG_1 | MipmapSetting.UNK_FLAG_2,
+                        WrapMode = TextureWrapMode.repeatX | TextureWrapMode.repeatY | TextureWrapMode.unk6 | TextureWrapMode.unk7,
+                        LodBias = -10,
+                        AnisotropicFilter = GXAnisotropy.GX_ANISO_4,
+                        Unk0x12 = TexFlags0x10.unk4 | TexFlags0x10.unk5,
+                    },
+                };
+                var textureHashes = new string[]
+                {
+                    "464b664cf359897a0f57a3f6a04d8dbb", // st07 tex 17
+                };
+                var material = new Material
+                {
+                    MaterialColor = new GXColor(0xb2b2b2ff),
+                    AmbientColor = new GXColor(0x7f7f7fff),
+                    SpecularColor = new GXColor(0x00000000),
+                    Unk0x10 = 0,
+                    Alpha = 255,
+                    UnkAlpha0x14 = -1,
+                };
+                var submesh = new Submesh()
+                {
+                    RenderFlags = 0,
+                    Material = material,
+                    UnkAlphaOptions = new UnkAlphaOptions(),
+                };
+                var template = new GcmfTemplate()
+                {
+                    Name = baseName + nameof(CurbSlope),
+                    IsTranslucid = false,
+                    Submesh = submesh,
+                    TevLayers = tevLayers,
+                    TextureHashes = textureHashes,
+                    TextureScrollFields = null,
+                };
+
+                return template;
+            }
+
+            public static GcmfTemplate LaneDivider()
+            {
+                // ST07 road1 submesh 0, tevs 2
+                var tevLayers = new TevLayer[]
+                {
+                    new TevLayer()
+                    {
+                        MipmapSetting = MipmapSetting.ENABLE_MIPMAP | MipmapSetting.UNK_FLAG_1 | MipmapSetting.UNK_FLAG_2,
+                        WrapMode = TextureWrapMode.repeatY | TextureWrapMode.unk6 | TextureWrapMode.unk7,
+                        LodBias = -10,
+                        AnisotropicFilter = GXAnisotropy.GX_ANISO_4,
+                        Unk0x12 = TexFlags0x10.unk4 | TexFlags0x10.unk5,
+                    },
+                };
+                var textureHashes = new string[]
+                {
+                    "f987a1b8080957982b12b03980c07ff3", // st07 tex 10
+                };
+                var material = new Material
+                {
+                    MaterialColor = new GXColor(0xb2b2b2ff),
+                    AmbientColor = new GXColor(0x7f7f7fff),
+                    SpecularColor = new GXColor(0x00000000),
+                    Unk0x10 = 0,
+                    Alpha = 255,
+                    UnkAlpha0x14 = -1,
+                };
+                var submesh = new Submesh()
+                {
+                    RenderFlags = 0,
+                    Material = material,
+                    UnkAlphaOptions = new UnkAlphaOptions(),
+                };
+                var template = new GcmfTemplate()
+                {
+                    Name = baseName + nameof(LaneDivider),
+                    IsTranslucid = false,
+                    Submesh = submesh,
+                    TevLayers = tevLayers,
+                    TextureHashes = textureHashes,
+                    TextureScrollFields = null,
+                };
+
+                return template;
+            }
+
+            public static GcmfTemplate RoadRail()
+            {
+                var tevLayers = new TevLayer[]
+                {
+                    new TevLayer()
+                    {
+                        Unk0x00 = 0,
+                        MipmapSetting = MipmapSetting.ENABLE_MIPMAP | MipmapSetting.UNK_FLAG_1 | MipmapSetting.UNK_FLAG_2,
+                        WrapMode = TextureWrapMode.repeatX | TextureWrapMode.repeatY | TextureWrapMode.unk6 | TextureWrapMode.unk7,
+                        LodBias = -10,
+                        AnisotropicFilter = GXAnisotropy.GX_ANISO_4,
+                        Unk0x0C = 0,
+                        Unk0x12 = TexFlags0x10.unk4 | TexFlags0x10.unk5,
+                    },
+                };
+                var textureHashes = new string[]
+                {
+                    "11c73030bdd91c0b90bdea517d5d43a5", // st07 tex 27
+                };
+                var material = new Material
+                {
+                    MaterialColor = new GXColor(0xffffffff),
+                    AmbientColor = new GXColor(0xf8f8f8ff),
+                    SpecularColor = new GXColor(0x00000000),
+                    Unk0x10 = 0,
+                    Alpha = 255,
+                    UnkAlpha0x14 = 0,
+                    Unk0x15 = 0,
+                };
+                var submesh = new Submesh()
+                {
+                    RenderFlags = RenderFlags.unlit | RenderFlags.doubleSidedFaces,
+                    Material = material,
+                    UnkAlphaOptions = new UnkAlphaOptions(),
+                };
+                var template = new GcmfTemplate()
+                {
+                    Name = baseName + nameof(RoadRail),
+                    IsTranslucid = false,
+                    Submesh = submesh,
+                    TevLayers = tevLayers,
+                    TextureHashes = textureHashes,
+                };
+
+                return template;
+            }
+
+            public static GcmfTemplate RoadSides()
+            {
+                // ST07 road1 submesh 0, tevs 4
+                var tevLayers = new TevLayer[]
+                {
+                    new TevLayer()
+                    {
+                        MipmapSetting = MipmapSetting.ENABLE_MIPMAP | MipmapSetting.UNK_FLAG_1 | MipmapSetting.UNK_FLAG_2,
+                        WrapMode = TextureWrapMode.repeatX | TextureWrapMode.repeatY | TextureWrapMode.unk6 | TextureWrapMode.unk7,
+                        LodBias = -10,
+                        AnisotropicFilter = GXAnisotropy.GX_ANISO_4,
+                        Unk0x12 = TexFlags0x10.unk4 | TexFlags0x10.unk5,
+                    },
+                };
+                var textureHashes = new string[]
+                {
+                    "c69e0c389cf9b6b33e6a22dd2376def9", // st07 tex 8
+                };
+                var material = new Material
+                {
+                    MaterialColor = new GXColor(0xb2b2b2ff),
+                    AmbientColor = new GXColor(0x7f7f7fff),
+                    SpecularColor = new GXColor(0x00000000),
+                    Unk0x10 = 0,
+                    Alpha = 255,
+                    UnkAlpha0x14 = -1,
+                };
+                var submesh = new Submesh()
+                {
+                    RenderFlags = 0,
+                    Material = material,
+                    UnkAlphaOptions = new UnkAlphaOptions(),
+                };
+                var template = new GcmfTemplate()
+                {
+                    Name = baseName + nameof(RoadSides),
+                    IsTranslucid = false,
+                    Submesh = submesh,
+                    TevLayers = tevLayers,
+                    TextureHashes = textureHashes,
+                    TextureScrollFields = null,
+                };
+
+                return template;
+            }
+
+            public static GcmfTemplate RoadSideLow(bool isTransparent)
+            {
+                // ST07 road1 submesh 0, tevs 5
+                var tevLayers = new TevLayer[]
+                {
+                    new TevLayer()
+                    {
+                        MipmapSetting = MipmapSetting.ENABLE_MIPMAP | MipmapSetting.UNK_FLAG_1 | MipmapSetting.UNK_FLAG_2,
+                        WrapMode = TextureWrapMode.repeatX | TextureWrapMode.repeatY | TextureWrapMode.unk6 | TextureWrapMode.unk7,
+                        LodBias = -10,
+                        AnisotropicFilter = GXAnisotropy.GX_ANISO_4,
+                        Unk0x12 = TexFlags0x10.unk4 | TexFlags0x10.unk5,
+                    },
+                };
+                var textureHashes = new string[]
+                {
+                    "784416c43fc687669d9c501394f21696", // st07 tex 31
+                };
+                var material = new Material
+                {
+                    MaterialColor = new GXColor(0xb2b2b2ff),
+                    AmbientColor = new GXColor(0x7f7f7fff),
+                    SpecularColor = new GXColor(0x00000000),
+                    Unk0x10 = 0,
+                    Alpha = 255,
+                    UnkAlpha0x14 = -1,
+                };
+                var submesh = new Submesh()
+                {
+                    RenderFlags = isTransparent ? RenderFlags.unlit | RenderFlags.doubleSidedFaces : RenderFlags.unlit,
+                    Material = material,
+                    UnkAlphaOptions = new UnkAlphaOptions(),
+                };
+                var template = new GcmfTemplate()
+                {
+                    Name = baseName + nameof(RoadSideLow),
+                    IsTranslucid = false,
+                    Submesh = submesh,
+                    TevLayers = tevLayers,
+                    TextureHashes = textureHashes,
+                    TextureScrollFields = null,
+                };
+
+                return template;
+            }
         }
 
         public static class SandOcean

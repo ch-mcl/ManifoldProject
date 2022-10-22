@@ -1480,7 +1480,113 @@ namespace Manifold.EditorTools.GC.GFZ
 
             public static class PortTown
             {
+                public const float kLengthTrim = RoadTexStride;
+                public const float kLengthRoadTop = RoadTexStride;
+                public const float kLengthRoadBottom = RoadTexStride;
+                public const float kLengthRoadSides = RoadTexStride;
+                public const float kThickness = 11f;
+                public const float kInsetTop = kCurbSlantInner;
+                public const float kInsetBottom = 5.5f;
 
+
+                public const float kLengthRail = RoadTexStride / 1.5f;
+
+                private static Tristrip[] CreateRailwithUV(Matrix4x4[] matrices, float height, float repetitionsRoadTexture, bool isLeftSide)
+                {
+                    float side = isLeftSide ? -0.5f : 0.5f;
+
+                    var top = new Vector3(side, height, 0f);
+                    var bottom = new Vector3(side, kCurbHeight, 0f);
+
+                    var tristrips = GenerateHorizontalLineWithNormals(matrices, bottom, top, Vector3.right, 1, false, true);
+
+                    var uvs = CreateTristripScaledUVs(tristrips, 1, repetitionsRoadTexture);
+                    uvs = SwapUV(uvs);
+                    for (int i = 0; i < tristrips.Length; i++)
+                    {
+                        tristrips[i].tex0 = uvs[i];
+                    }
+
+                    return tristrips;
+                }
+
+                public static Tristrip[] RoadTop(Matrix4x4[] matrices, GfzShapeRoad road, float segmentLength)
+                {
+                    var tristrips = StandardTop(matrices, road.WidthDivisions);
+
+                    float repetitionsRoadTexture = math.ceil(segmentLength / kLengthTrim);
+                    var uvs = CreateTristripScaledUVs(tristrips, road.TexRepeatWidthTop, repetitionsRoadTexture);
+                    for (int i = 0; i < tristrips.Length; i++)
+                    {
+                        tristrips[i].tex0 = uvs[i];
+                    }
+
+                    return tristrips;
+                }
+
+                public static Tristrip[] CurbSlope(Matrix4x4[] matrices, GfzShapeRoad road, float segmentLength)
+                {
+                    var tristrips = StandardCurbSlant(matrices);
+                    float repetitionsRoadTexture = math.ceil(segmentLength / kLengthTrim);
+                    var uvs = CreateTristripScaledUVs(tristrips, 2, repetitionsRoadTexture);
+                    for (int i = 0; i < tristrips.Length; i++)
+                    {
+                        tristrips[i].tex0 = uvs[i];
+                    }
+
+                    return tristrips;
+                }
+
+                public static Tristrip[] RoadBottom(Matrix4x4[] matrices, GfzShapeRoad road, float segmentLength)
+                {
+                    var matricesInset = ModifyMatrixScales(matrices, new Vector3(kInsetBottom * -2f, kThickness -1f, 0));
+                    var endpointA = new Vector3(-0.5f, -1f, 0); // left
+                    var endpointB = new Vector3(+0.5f, -1f, 0); // right
+                    var tristrips = GenerateHorizontalLineWithNormals(matricesInset, endpointA, endpointB, Vector3.down, road.WidthDivisions, false);
+
+                    float repetitionsAlongLength = math.ceil(segmentLength / kLengthRoadBottom);
+                    var uvs = CreateTristripScaledUVs(tristrips, road.TexRepeatWidthBottom, repetitionsAlongLength);
+                    for (int i = 0; i < tristrips.Length; i++)
+                        tristrips[i].tex0 = uvs[i];
+
+                    return tristrips;
+                }
+
+                public static Tristrip[] RoadRail(Matrix4x4[] matrices, GfzShapeRoad road, float segmentLength)
+                {
+                    var allTristrips = new List<Tristrip>();
+
+                    float repetitionsRoadTexture = math.ceil(segmentLength / kLengthRail);
+                    // rail left
+                    if (road.RailHeightLeft > 0f)
+                    {
+                        var railTristripsLeft = CreateRailwithUV(matrices, road.RailHeightLeft, repetitionsRoadTexture, true);
+                        allTristrips.AddRange(railTristripsLeft);
+                    }
+
+                    // rail right
+                    if (road.RailHeightRight > 0f)
+                    {
+                        var railTristripsLeft = CreateRailwithUV(matrices, road.RailHeightRight, repetitionsRoadTexture, false);
+                        allTristrips.AddRange(railTristripsLeft);
+                    }
+
+                    return allTristrips.ToArray();
+                }
+
+                public static Tristrip[] RoadSideLow(Matrix4x4[] matrices, GfzShapeRoad road, float segmentLength)
+                {
+                    var tristrips = StandardSides(matrices, 0, kInsetBottom, -kCurbHeight * 2f, kThickness);
+
+                    float repetitionsRoadTexture = math.ceil(segmentLength / kLengthRoadSides);
+                    var uvs = CreateTristripScaledUVs(tristrips, -2, repetitionsRoadTexture);
+                    for (int i = 0; i < tristrips.Length; i++)
+                    {
+                        tristrips[i].tex0 = uvs[i];
+                    }
+
+                    return tristrips;
+                }
             }
 
             public static class SandOcean

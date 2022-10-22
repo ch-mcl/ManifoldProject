@@ -48,6 +48,7 @@ namespace Manifold.EditorTools.GC.GFZ.Stage.Track
         public const string metRoadTop = shadersAssetsPath + "met_top.shadergraph";
 
 
+
         [MenuItem(GfzMenuItems.Materials.CreateEditorMaterials, priority = GfzMenuItems.Materials.Priority.CreateEditorMaterials)]
         public static void CreateAllMaterials()
         {
@@ -55,6 +56,7 @@ namespace Manifold.EditorTools.GC.GFZ.Stage.Track
             MuteCity.CreateAllMaterials();
             MuteCityCOM.CreateAllMaterials();
             OuterSpace.CreateAllMaterials();
+            PortTown.CreateAllMaterials();
         }
 
         private static string GetAssetsPath()
@@ -210,5 +212,26 @@ namespace Manifold.EditorTools.GC.GFZ.Stage.Track
             public static string Top() => CreateMaterial(metRoadTop, GcmfTemplates.OuterSpace.Top());
         }
 
+        public static class PortTown
+        {
+            public static void CreateAllMaterials()
+            {
+                RoadTop();
+                CurbSlope();
+                LaneDivider();
+                RoadBottom();
+                RoadRails();
+                RoadSides();
+                RoadSideLow();
+            }
+
+            public static string RoadTop() => CreateMaterial(shadergraph_mt_m_1Tex, GcmfTemplates.PortTown.RoadTop());
+            public static string CurbSlope() => CreateMaterial(shadergraph_mt_r_1Tex, GcmfTemplates.PortTown.CurbSlope());
+            public static string LaneDivider() => CreateMaterial(shadergraph_mt_r_1Tex, GcmfTemplates.PortTown.LaneDivider());
+            public static string RoadBottom() => CreateMaterial(shadergraph_mt_m_1Tex, GcmfTemplates.MuteCity.RoadBottom());
+            public static string RoadRails() => CreateMaterial(shadergraph_mt_r_1Tex, GcmfTemplates.PortTown.RoadRail());
+            public static string RoadSides() => CreateMaterial(shadergraph_mt_m_1Tex, GcmfTemplates.MuteCity.RoadSides());
+            public static string RoadSideLow() => CreateMaterial(shadergraph_mt_r_1Tex, GcmfTemplates.PortTown.RoadSideLow(false));
+        }
     }
 }

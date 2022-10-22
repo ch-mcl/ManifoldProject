@@ -63,7 +63,18 @@ namespace Manifold.EditorTools.GC.GFZ.Stage.Track
                         GcmfTemplates.OuterSpace.RailsLights(),
                         GcmfTemplates.OuterSpace.EndCap(),
                     };
-
+                case RoadMeshStyle.PortTown:
+                    return new GcmfTemplate[]
+                    {
+                        GcmfTemplates.PortTown.RoadTop(),
+                        GcmfTemplates.PortTown.CurbSlope(),
+                        GcmfTemplates.PortTown.LaneDivider(),
+                        //GcmfTemplates.PortTown.LaneDivider(),
+                        GcmfTemplates.MuteCity.RoadBottom(),
+                        GcmfTemplates.PortTown.RoadRail(),
+                        GcmfTemplates.MuteCity.RoadSides(),
+                        GcmfTemplates.PortTown.RoadSideLow(false),
+                    };
                 default:
                     return new GcmfTemplate[] { GcmfTemplates.Debug.CreateLitVertexColoredDoubleSided() };
             }
@@ -106,6 +117,17 @@ namespace Manifold.EditorTools.GC.GFZ.Stage.Track
                         TristripTemplates.Road.OuterSpace.RailsAngle(matrices, this, maxTime),
                         TristripTemplates.Road.OuterSpace.RailsLights(matrices, this, maxTime),
                         TristripTemplates.Road.OuterSpace.EndCaps(matrices, this, maxTime),
+                    };
+                case RoadMeshStyle.PortTown:
+                    return new Tristrip[][]
+                    {
+                        TristripTemplates.Road.PortTown.RoadTop(matrices, this, maxTime),
+                        TristripTemplates.Road.PortTown.CurbSlope(matrices, this, maxTime),
+                        TristripTemplates.Road.MuteCity.CreateLaneDividers(matrices, this, maxTime),
+                        TristripTemplates.Road.PortTown.RoadBottom(matrices, this, maxTime),
+                        TristripTemplates.Road.PortTown.RoadRail(matrices, this, maxTime),
+                        TristripTemplates.Road.MuteCity.CreateRoadTrim(matrices, this, maxTime, isGfzCoordinateSpace),
+                        TristripTemplates.Road.PortTown.RoadSideLow(matrices, this, maxTime),
                     };
 
                 default:
