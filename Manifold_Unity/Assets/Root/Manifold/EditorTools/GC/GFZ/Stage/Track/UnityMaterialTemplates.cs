@@ -221,8 +221,9 @@ namespace Manifold.EditorTools.GC.GFZ.Stage.Track
                 LaneDivider();
                 RoadBottom();
                 RoadRails();
-                RoadSides();
-                RoadSideLow();
+                RoadCrubs();
+                RoadSide();
+                EndCap();
             }
 
             public static string RoadTop() => CreateMaterial(shadergraph_mt_m_1Tex, GcmfTemplates.PortTown.RoadTop());
@@ -230,8 +231,9 @@ namespace Manifold.EditorTools.GC.GFZ.Stage.Track
             public static string LaneDivider() => CreateMaterial(shadergraph_mt_r_1Tex, GcmfTemplates.PortTown.LaneDivider());
             public static string RoadBottom() => CreateMaterial(shadergraph_mt_m_1Tex, GcmfTemplates.MuteCity.RoadBottom());
             public static string RoadRails() => CreateMaterial(shadergraph_mt_r_1Tex, GcmfTemplates.PortTown.RoadRail());
-            public static string RoadSides() => CreateMaterial(shadergraph_mt_m_1Tex, GcmfTemplates.MuteCity.RoadSides());
-            public static string RoadSideLow() => CreateMaterial(shadergraph_mt_r_1Tex, GcmfTemplates.PortTown.RoadSideLow(false));
+            public static string RoadCrubs() => CreateMaterial(shadergraph_mt_m_1Tex, GcmfTemplates.MuteCity.RoadSides()); // Crub top and side
+            public static string RoadSide() => CreateMaterial(shadergraph_mt_r_1Tex, GcmfTemplates.PortTown.RoadSide(false));
+            public static string EndCap() => CreateMaterial(shadergraph_mt_r_1Tex, GcmfTemplates.PortTown.RoadSideEndCap(false));
         }
     }
 }

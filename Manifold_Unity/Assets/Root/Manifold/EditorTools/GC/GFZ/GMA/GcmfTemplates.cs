@@ -1709,53 +1709,7 @@ namespace Manifold.EditorTools.GC.GFZ
                 return template;
             }
 
-            public static GcmfTemplate RoadSides()
-            {
-                // ST07 road1 submesh 0, tevs 4
-                var tevLayers = new TevLayer[]
-                {
-                    new TevLayer()
-                    {
-                        MipmapSetting = MipmapSetting.ENABLE_MIPMAP | MipmapSetting.UNK_FLAG_1 | MipmapSetting.UNK_FLAG_2,
-                        WrapMode = TextureWrapMode.repeatX | TextureWrapMode.repeatY | TextureWrapMode.unk6 | TextureWrapMode.unk7,
-                        LodBias = -10,
-                        AnisotropicFilter = GXAnisotropy.GX_ANISO_4,
-                        Unk0x12 = TexFlags0x10.unk4 | TexFlags0x10.unk5,
-                    },
-                };
-                var textureHashes = new string[]
-                {
-                    "c69e0c389cf9b6b33e6a22dd2376def9", // st07 tex 8
-                };
-                var material = new Material
-                {
-                    MaterialColor = new GXColor(0xb2b2b2ff),
-                    AmbientColor = new GXColor(0x7f7f7fff),
-                    SpecularColor = new GXColor(0x00000000),
-                    Unk0x10 = 0,
-                    Alpha = 255,
-                    UnkAlpha0x14 = -1,
-                };
-                var submesh = new Submesh()
-                {
-                    RenderFlags = 0,
-                    Material = material,
-                    UnkAlphaOptions = new UnkAlphaOptions(),
-                };
-                var template = new GcmfTemplate()
-                {
-                    Name = baseName + nameof(RoadSides),
-                    IsTranslucid = false,
-                    Submesh = submesh,
-                    TevLayers = tevLayers,
-                    TextureHashes = textureHashes,
-                    TextureScrollFields = null,
-                };
-
-                return template;
-            }
-
-            public static GcmfTemplate RoadSideLow(bool isTransparent)
+            public static GcmfTemplate RoadSide(bool isTransparent)
             {
                 // ST07 road1 submesh 0, tevs 5
                 var tevLayers = new TevLayer[]
@@ -1790,7 +1744,53 @@ namespace Manifold.EditorTools.GC.GFZ
                 };
                 var template = new GcmfTemplate()
                 {
-                    Name = baseName + nameof(RoadSideLow),
+                    Name = baseName + nameof(RoadSide),
+                    IsTranslucid = false,
+                    Submesh = submesh,
+                    TevLayers = tevLayers,
+                    TextureHashes = textureHashes,
+                    TextureScrollFields = null,
+                };
+
+                return template;
+            }
+
+            public static GcmfTemplate RoadSideEndCap(bool isTransparent)
+            {
+                // ST07 road1 submesh 0, tevs 5
+                var tevLayers = new TevLayer[]
+                {
+                    new TevLayer()
+                    {
+                        MipmapSetting = MipmapSetting.ENABLE_MIPMAP | MipmapSetting.UNK_FLAG_1 | MipmapSetting.UNK_FLAG_2,
+                        WrapMode = TextureWrapMode.repeatX | TextureWrapMode.repeatY | TextureWrapMode.unk6 | TextureWrapMode.unk7,
+                        LodBias = -10,
+                        AnisotropicFilter = GXAnisotropy.GX_ANISO_4,
+                        Unk0x12 = TexFlags0x10.unk4 | TexFlags0x10.unk5,
+                    },
+                };
+                var textureHashes = new string[]
+                {
+                    "784416c43fc687669d9c501394f21696", // st07 tex 31
+                };
+                var material = new Material
+                {
+                    MaterialColor = new GXColor(0xb2b2b2ff),
+                    AmbientColor = new GXColor(0x7f7f7fff),
+                    SpecularColor = new GXColor(0x00000000),
+                    Unk0x10 = 0,
+                    Alpha = 255,
+                    UnkAlpha0x14 = -1,
+                };
+                var submesh = new Submesh()
+                {
+                    RenderFlags = isTransparent ? RenderFlags.unlit | RenderFlags.doubleSidedFaces : RenderFlags.unlit,
+                    Material = material,
+                    UnkAlphaOptions = new UnkAlphaOptions(),
+                };
+                var template = new GcmfTemplate()
+                {
+                    Name = baseName + nameof(RoadSideEndCap),
                     IsTranslucid = false,
                     Submesh = submesh,
                     TevLayers = tevLayers,

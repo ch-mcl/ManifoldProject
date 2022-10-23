@@ -69,11 +69,11 @@ namespace Manifold.EditorTools.GC.GFZ.Stage.Track
                         GcmfTemplates.PortTown.RoadTop(),
                         GcmfTemplates.PortTown.CurbSlope(),
                         GcmfTemplates.PortTown.LaneDivider(),
-                        //GcmfTemplates.PortTown.LaneDivider(),
                         GcmfTemplates.MuteCity.RoadBottom(),
                         GcmfTemplates.PortTown.RoadRail(),
                         GcmfTemplates.MuteCity.RoadSides(),
-                        GcmfTemplates.PortTown.RoadSideLow(false),
+                        GcmfTemplates.PortTown.RoadSide(false),
+                        GcmfTemplates.PortTown.RoadSideEndCap(false),
                     };
                 default:
                     return new GcmfTemplate[] { GcmfTemplates.Debug.CreateLitVertexColoredDoubleSided() };
@@ -128,6 +128,7 @@ namespace Manifold.EditorTools.GC.GFZ.Stage.Track
                         TristripTemplates.Road.PortTown.RoadRail(matrices, this, maxTime),
                         TristripTemplates.Road.MuteCity.CreateRoadTrim(matrices, this, maxTime, isGfzCoordinateSpace),
                         TristripTemplates.Road.PortTown.RoadSideLow(matrices, this, maxTime),
+                        TristripTemplates.Road.PortTown.EndCaps(matrices, this, maxTime),
                     };
 
                 default:
