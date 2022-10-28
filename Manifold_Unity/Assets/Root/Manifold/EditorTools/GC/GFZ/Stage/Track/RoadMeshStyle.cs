@@ -9,5 +9,7 @@
         OuterSpace = 3,
 
         PortTown = 4,
+        PortTownAlt = 5,
+
     }
 }

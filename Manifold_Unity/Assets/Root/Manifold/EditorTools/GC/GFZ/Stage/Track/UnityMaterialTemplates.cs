@@ -57,6 +57,7 @@ namespace Manifold.EditorTools.GC.GFZ.Stage.Track
             MuteCityCOM.CreateAllMaterials();
             OuterSpace.CreateAllMaterials();
             PortTown.CreateAllMaterials();
+            PortTownAlt.CreateAllMaterials();
         }
 
         private static string GetAssetsPath()
@@ -227,13 +228,37 @@ namespace Manifold.EditorTools.GC.GFZ.Stage.Track
             }
 
             public static string RoadTop() => CreateMaterial(shadergraph_mt_m_1Tex, GcmfTemplates.PortTown.RoadTop());
-            public static string CurbSlope() => CreateMaterial(shadergraph_mt_r_1Tex, GcmfTemplates.PortTown.CurbSlope());
+            public static string CurbSlope() => CreateMaterial(shadergraph_mt_r_1Tex, GcmfTemplates.PortTown.CurbSlope(false));
             public static string LaneDivider() => CreateMaterial(shadergraph_mt_r_1Tex, GcmfTemplates.PortTown.LaneDivider());
             public static string RoadBottom() => CreateMaterial(shadergraph_mt_m_1Tex, GcmfTemplates.MuteCity.RoadBottom());
             public static string RoadRails() => CreateMaterial(shadergraph_mt_r_1Tex, GcmfTemplates.PortTown.RoadRail());
             public static string RoadCrubs() => CreateMaterial(shadergraph_mt_m_1Tex, GcmfTemplates.MuteCity.RoadSides()); // Crub top and side
             public static string RoadSide() => CreateMaterial(shadergraph_mt_r_1Tex, GcmfTemplates.PortTown.RoadSide(false));
             public static string EndCap() => CreateMaterial(shadergraph_mt_r_1Tex, GcmfTemplates.PortTown.RoadSideEndCap(false));
+        }
+
+        public static class PortTownAlt
+        {
+            public static void CreateAllMaterials()
+            {
+                CurbSlope();
+                LaneDivider();
+                RoadRails();
+                RoadCrubs();
+                RoadSide();
+                EndCap();
+                RoadBottom();
+                RoadTop();
+            }
+
+            public static string CurbSlope() => CreateMaterial(shadergraph_mt_r_1Tex, GcmfTemplates.PortTown.CurbSlope(true));
+            public static string LaneDivider() => CreateMaterial(shadergraph_mt_r_1Tex, GcmfTemplates.PortTown.LaneDivider());
+            public static string RoadRails() => CreateMaterial(shadergraph_mt_r_1Tex, GcmfTemplates.PortTown.RoadRail());
+            public static string RoadCrubs() => CreateMaterial(shadergraph_mt_m_1Tex, GcmfTemplates.MuteCity.RoadSides()); // Crub top and side
+            public static string RoadSide() => CreateMaterial(shadergraph_mt_r_1Tex, GcmfTemplates.PortTown.RoadSide(true));
+            public static string EndCap() => CreateMaterial(shadergraph_mt_r_1Tex, GcmfTemplates.PortTown.RoadSideEndCap(true));
+            public static string RoadBottom() => CreateMaterial(shadergraph_mt_m_1Tex, GcmfTemplates.PortTown.TransRoadBottom());
+            public static string RoadTop() => CreateMaterial(shadergraph_mt_m_2TexAdd, GcmfTemplates.PortTown.TransRoadTop());
         }
     }
 }

@@ -67,13 +67,25 @@ namespace Manifold.EditorTools.GC.GFZ.Stage.Track
                     return new GcmfTemplate[]
                     {
                         GcmfTemplates.PortTown.RoadTop(),
-                        GcmfTemplates.PortTown.CurbSlope(),
+                        GcmfTemplates.PortTown.CurbSlope(false),
                         GcmfTemplates.PortTown.LaneDivider(),
                         GcmfTemplates.MuteCity.RoadBottom(),
                         GcmfTemplates.PortTown.RoadRail(),
                         GcmfTemplates.MuteCity.RoadSides(),
                         GcmfTemplates.PortTown.RoadSide(false),
                         GcmfTemplates.PortTown.RoadSideEndCap(false),
+                    };
+                case RoadMeshStyle.PortTownAlt:
+                    return new GcmfTemplate[]
+                    {
+                        GcmfTemplates.PortTown.CurbSlope(true),
+                        GcmfTemplates.PortTown.LaneDivider(),
+                        GcmfTemplates.PortTown.RoadRail(),
+                        GcmfTemplates.MuteCity.RoadSides(),
+                        GcmfTemplates.PortTown.RoadSide(true),
+                        GcmfTemplates.PortTown.RoadSideEndCap(true),
+                        GcmfTemplates.PortTown.TransRoadBottom(),
+                        GcmfTemplates.PortTown.TransRoadTop(),
                     };
                 default:
                     return new GcmfTemplate[] { GcmfTemplates.Debug.CreateLitVertexColoredDoubleSided() };
@@ -121,7 +133,7 @@ namespace Manifold.EditorTools.GC.GFZ.Stage.Track
                 case RoadMeshStyle.PortTown:
                     return new Tristrip[][]
                     {
-                        TristripTemplates.Road.PortTown.RoadTop(matrices, this, maxTime),
+                        TristripTemplates.Road.PortTown.RoadTop(matrices, this, maxTime, false),
                         TristripTemplates.Road.PortTown.CurbSlope(matrices, this, maxTime),
                         TristripTemplates.Road.MuteCity.CreateLaneDividers(matrices, this, maxTime),
                         TristripTemplates.Road.PortTown.RoadBottom(matrices, this, maxTime),
@@ -130,7 +142,18 @@ namespace Manifold.EditorTools.GC.GFZ.Stage.Track
                         TristripTemplates.Road.PortTown.RoadSideLow(matrices, this, maxTime),
                         TristripTemplates.Road.PortTown.EndCaps(matrices, this, maxTime),
                     };
-
+                case RoadMeshStyle.PortTownAlt:
+                    return new Tristrip[][]
+                    {
+                        TristripTemplates.Road.PortTown.CurbSlope(matrices, this, maxTime),
+                        TristripTemplates.Road.MuteCity.CreateLaneDividers(matrices, this, maxTime),
+                        TristripTemplates.Road.PortTown.RoadRail(matrices, this, maxTime),
+                        TristripTemplates.Road.MuteCity.CreateRoadTrim(matrices, this, maxTime, isGfzCoordinateSpace),
+                        TristripTemplates.Road.PortTown.RoadSideLow(matrices, this, maxTime),
+                        TristripTemplates.Road.PortTown.EndCaps(matrices, this, maxTime),
+                        TristripTemplates.Road.PortTown.RoadBottom(matrices, this, maxTime),
+                        TristripTemplates.Road.PortTown.RoadTop(matrices, this, maxTime, true),
+                    };
                 default:
                     return new Tristrip[][]
                     {

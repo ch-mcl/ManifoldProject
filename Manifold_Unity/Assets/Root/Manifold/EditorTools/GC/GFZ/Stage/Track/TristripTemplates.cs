@@ -1512,7 +1512,7 @@ namespace Manifold.EditorTools.GC.GFZ
                     return tristrips;
                 }
 
-                public static Tristrip[] RoadTop(Matrix4x4[] matrices, GfzShapeRoad road, float segmentLength)
+                public static Tristrip[] RoadTop(Matrix4x4[] matrices, GfzShapeRoad road, float segmentLength, bool isTransparent)
                 {
                     var tristrips = StandardTop(matrices, road.WidthDivisions);
 
@@ -1521,6 +1521,9 @@ namespace Manifold.EditorTools.GC.GFZ
                     for (int i = 0; i < tristrips.Length; i++)
                     {
                         tristrips[i].tex0 = uvs[i];
+                        if (isTransparent) {
+                            tristrips[i].tex1 = uvs[i];
+                        }
                     }
 
                     return tristrips;
