@@ -87,6 +87,24 @@ namespace Manifold.EditorTools.GC.GFZ.Stage.Track
                         GcmfTemplates.PortTown.TransRoadBottom(),
                         GcmfTemplates.PortTown.TransRoadTop(),
                     };
+                case RoadMeshStyle.BigBlue:
+                    return new GcmfTemplate[]
+                    {
+                        GcmfTemplates.BigBlue.RoadTop(),
+                        GcmfTemplates.MuteCity.RoadBottom(),
+                        GcmfTemplates.BigBlue.CurbSlope(),
+                        GcmfTemplates.BigBlue.RoadRail(),
+                        GcmfTemplates.BigBlue.CurbTop(),
+                    };
+                case RoadMeshStyle.BigBlueAlt:
+                    return new GcmfTemplate[]
+                    {
+                        GcmfTemplates.BigBlue.RoadTopAlt(),
+                        GcmfTemplates.MuteCity.RoadBottom(),
+                        GcmfTemplates.BigBlue.CurbSlopeAlt(),
+                        GcmfTemplates.BigBlue.CurbTopAlt(),
+                        GcmfTemplates.BigBlue.RoadRailAlt(),
+                    };
                 default:
                     return new GcmfTemplate[] { GcmfTemplates.Debug.CreateLitVertexColoredDoubleSided() };
             }
@@ -153,6 +171,24 @@ namespace Manifold.EditorTools.GC.GFZ.Stage.Track
                         TristripTemplates.Road.PortTown.EndCaps(matrices, this, maxTime),
                         TristripTemplates.Road.PortTown.RoadBottom(matrices, this, maxTime),
                         TristripTemplates.Road.PortTown.RoadTop(matrices, this, maxTime, true),
+                    };
+                case RoadMeshStyle.BigBlue:
+                    return new Tristrip[][]
+                    {
+                        TristripTemplates.Road.BigBlue.RoadTop(matrices, this, maxTime, false),
+                        TristripTemplates.Road.MuteCity.CreateRoadBottom(matrices, this, maxTime),
+                        TristripTemplates.Road.MuteCity.CreateRoadEmbellishments(matrices, this, maxTime), // CrubSlant
+                        TristripTemplates.Road.BigBlue.RoadRail(matrices, this, maxTime, 1f, false),
+                        TristripTemplates.Road.MuteCity.CreateRoadTrim(matrices, this, maxTime, isGfzCoordinateSpace),// CrubTop and CrubSide
+                    };
+                case RoadMeshStyle.BigBlueAlt:
+                    return new Tristrip[][]
+                    {
+                        TristripTemplates.Road.BigBlue.RoadTop(matrices, this, maxTime, false),
+                        TristripTemplates.Road.MuteCity.CreateRoadBottom(matrices, this, maxTime),
+                        TristripTemplates.Road.MuteCity.CreateRoadEmbellishments(matrices, this, maxTime), // CrubSlant
+                        TristripTemplates.Road.MuteCity.CreateRoadTrim(matrices, this, maxTime, isGfzCoordinateSpace, true),// CrubTop and CrubSide
+                        TristripTemplates.Road.BigBlue.RoadRail(matrices, this, maxTime, 2f, true),
                     };
                 default:
                     return new Tristrip[][]

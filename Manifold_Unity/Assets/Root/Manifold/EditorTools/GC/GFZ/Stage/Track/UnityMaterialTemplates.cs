@@ -58,6 +58,8 @@ namespace Manifold.EditorTools.GC.GFZ.Stage.Track
             OuterSpace.CreateAllMaterials();
             PortTown.CreateAllMaterials();
             PortTownAlt.CreateAllMaterials();
+            BigBlue.CreateAllMaterials();
+            BigBlueAlt.CreateAllMaterials();
         }
 
         private static string GetAssetsPath()
@@ -259,6 +261,44 @@ namespace Manifold.EditorTools.GC.GFZ.Stage.Track
             public static string EndCap() => CreateMaterial(shadergraph_mt_r_1Tex, GcmfTemplates.PortTown.RoadSideEndCap(true));
             public static string RoadBottom() => CreateMaterial(shadergraph_mt_m_1Tex, GcmfTemplates.PortTown.TransRoadBottom());
             public static string RoadTop() => CreateMaterial(shadergraph_mt_m_2TexAdd, GcmfTemplates.PortTown.TransRoadTop());
+        }
+
+        public static class BigBlue
+        {
+            public static void CreateAllMaterials()
+            {
+                RoadTop();
+                RoadBottom();
+                CurbSlope();
+                RoadRails();
+                RoadCrubs();
+                //EndCap();
+            }
+
+            public static string RoadTop() => CreateMaterial(shadergraph_mt_m_1Tex, GcmfTemplates.BigBlue.RoadTop());
+            public static string RoadBottom() => CreateMaterial(shadergraph_mt_m_1Tex, GcmfTemplates.MuteCity.RoadBottom());
+            public static string CurbSlope() => CreateMaterial(shadergraph_mt_r_1Tex, GcmfTemplates.BigBlue.CurbSlope());
+            public static string RoadRails() => CreateMaterial(shadergraph_mt_r_1Tex, GcmfTemplates.BigBlue.RoadRail());
+            public static string RoadCrubs() => CreateMaterial(shadergraph_mt_m_1Tex, GcmfTemplates.BigBlue.CurbTop()); // Crub top and side
+        }
+
+        public static class BigBlueAlt
+        {
+            public static void CreateAllMaterials()
+            {
+                RoadTop();
+                RoadBottom();
+                CurbSlope();
+                RoadCrubs();
+                RoadRails();
+                //EndCap();
+            }
+
+            public static string RoadTop() => CreateMaterial(shadergraph_mt_m_1Tex, GcmfTemplates.BigBlue.RoadTopAlt());
+            public static string RoadBottom() => CreateMaterial(shadergraph_mt_m_1Tex, GcmfTemplates.MuteCity.RoadBottom());
+            public static string CurbSlope() => CreateMaterial(shadergraph_mt_r_1Tex, GcmfTemplates.BigBlue.CurbSlopeAlt());
+            public static string RoadCrubs() => CreateMaterial(shadergraph_mt_m_1Tex, GcmfTemplates.BigBlue.CurbTop()); // Crub top and side
+            public static string RoadRails() => CreateMaterial(shadergraph_mt_r_1Tex, GcmfTemplates.BigBlue.RoadRailAlt());
         }
     }
 }

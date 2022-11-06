@@ -1129,6 +1129,418 @@ namespace Manifold.EditorTools.GC.GFZ
 
         public static class BigBlue
         {
+            const string baseName = "big_";
+
+            public static GcmfTemplate[] Road()
+            {
+                return new GcmfTemplate[]
+                {
+                    RoadTop(),
+                };
+            }
+
+            public static GcmfTemplate RoadTop()
+            {
+                // ST27 road1 submesh 3, tevs 4
+                var tevLayers = new TevLayer[]
+                {
+                    new TevLayer()
+                    {
+                        MipmapSetting = MipmapSetting.ENABLE_MIPMAP | MipmapSetting.UNK_FLAG_1 | MipmapSetting.UNK_FLAG_2,
+                        WrapMode = TextureWrapMode.mirrorX | TextureWrapMode.repeatY | TextureWrapMode.unk6 | TextureWrapMode.unk7,
+                        LodBias = -10,
+                        AnisotropicFilter = GXAnisotropy.GX_ANISO_4,
+                        Unk0x12 = TexFlags0x10.unk4 | TexFlags0x10.unk5,
+                    },
+                };
+                var textureHashes = new string[]
+                {
+                    "ba6beb968cdca2cba3dd04986ba63e94", // st27 tex 95
+                };
+                var material = new Material
+                {
+                    MaterialColor = new GXColor(0xffffffff),
+                    AmbientColor = new GXColor(0xffffffff),
+                    SpecularColor = new GXColor(0x00000000),
+                    Unk0x10 = 0,
+                    Alpha = 255,
+                    UnkAlpha0x14 = -1,
+                };
+                var submesh = new Submesh()
+                {
+                    RenderFlags = 0,
+                    Material = material,
+                    UnkAlphaOptions = new UnkAlphaOptions(),
+                };
+                var template = new GcmfTemplate()
+                {
+                    Name = baseName + nameof(RoadTop),
+                    IsTranslucid = false,
+                    Submesh = submesh,
+                    TevLayers = tevLayers,
+                    TextureHashes = textureHashes,
+                    TextureScrollFields = null,
+                };
+
+                return template;
+            }
+
+            public static GcmfTemplate CurbTop()
+            {
+                // ST27 road1 submesh 0, tevs 0
+                var tevLayers = new TevLayer[]
+                {
+                    new TevLayer()
+                    {
+                        MipmapSetting = MipmapSetting.ENABLE_MIPMAP | MipmapSetting.UNK_FLAG_1 | MipmapSetting.UNK_FLAG_2,
+                        WrapMode = TextureWrapMode.repeatY | TextureWrapMode.unk6 | TextureWrapMode.unk7,
+                        LodBias = -10,
+                        AnisotropicFilter = GXAnisotropy.GX_ANISO_4,
+                        Unk0x12 = TexFlags0x10.unk4 | TexFlags0x10.unk5,
+                    },
+                };
+                var textureHashes = new string[]
+                {
+                    "d1664def241a8a631729adff5f7983c6", // st27 tex 98
+                };
+                var material = new Material
+                {
+                    MaterialColor = new GXColor(0xb2b2b2ff),
+                    AmbientColor = new GXColor(0x7f7f7fff),
+                    SpecularColor = new GXColor(0x00000000),
+                    Unk0x10 = 0,
+                    Alpha = 255,
+                    UnkAlpha0x14 = -1,
+                };
+                var submesh = new Submesh()
+                {
+                    RenderFlags = 0,
+                    Material = material,
+                    UnkAlphaOptions = new UnkAlphaOptions(),
+                };
+                var template = new GcmfTemplate()
+                {
+                    Name = baseName + nameof(CurbTop),
+                    IsTranslucid = false,
+                    Submesh = submesh,
+                    TevLayers = tevLayers,
+                    TextureHashes = textureHashes,
+                    TextureScrollFields = null,
+                };
+
+                return template;
+            }
+
+            public static GcmfTemplate CurbSlope()
+            {
+                // ST27 road1 submesh 2, tevs 2, 3
+                var tevLayers = new TevLayer[]
+                {
+                    new TevLayer()
+                    {
+                        MipmapSetting = MipmapSetting.ENABLE_MIPMAP | MipmapSetting.UNK_FLAG_1 | MipmapSetting.UNK_FLAG_2,
+                        WrapMode = TextureWrapMode.mirrorX | TextureWrapMode.mirrorY | TextureWrapMode.unk6 | TextureWrapMode.unk7,
+                        LodBias = -10,
+                        AnisotropicFilter = GXAnisotropy.GX_ANISO_4,
+                        Unk0x12 = TexFlags0x10.unk4 | TexFlags0x10.unk5,
+                    },
+                    new TevLayer()
+                    {
+                        MipmapSetting = MipmapSetting.ENABLE_MIPMAP | MipmapSetting.UNK_FLAG_1 | MipmapSetting.UNK_FLAG_2,
+                        WrapMode = TextureWrapMode.mirrorX | TextureWrapMode.mirrorY | TextureWrapMode.unk6 | TextureWrapMode.unk7,
+                        LodBias = 0,
+                        AnisotropicFilter = GXAnisotropy.GX_ANISO_4,
+                        Unk0x12 = TexFlags0x10.unk0_AlphaScreenSelf |TexFlags0x10.unk4 | TexFlags0x10.unk5,
+                    },
+                };
+                var textureHashes = new string[]
+                {
+                    "b7dfa7b9f70984a5981a136027cc1db6", // st27 tex 97
+                    "b978ad119120a4cadd428707eefc2a5e", // st27 tex 107
+                };
+                var material = new Material
+                {
+                    MaterialColor = new GXColor(0xb2b2b2ff),
+                    AmbientColor = new GXColor(0x7f7f7fff),
+                    SpecularColor = new GXColor(0x00000000),
+                    Unk0x10 = 0,
+                    Alpha = 255,
+                    UnkAlpha0x14 = -1,
+                };
+                var submesh = new Submesh()
+                {
+                    RenderFlags = 0,
+                    Material = material,
+                    UnkAlphaOptions = new UnkAlphaOptions(),
+                };
+                var template = new GcmfTemplate()
+                {
+                    Name = baseName + nameof(CurbSlope),
+                    IsTranslucid = false,
+                    Submesh = submesh,
+                    TevLayers = tevLayers,
+                    TextureHashes = textureHashes,
+                    TextureScrollFields = null,
+                };
+
+                return template;
+            }
+
+            public static GcmfTemplate RoadRail()
+            {
+                // ST27 guardrail1 submesh 0, tevs 4
+                var tevLayers = new TevLayer[]
+                {
+                    new TevLayer()
+                    {
+                        Unk0x00 = 0,
+                        MipmapSetting = MipmapSetting.ENABLE_MIPMAP | MipmapSetting.UNK_FLAG_1 | MipmapSetting.UNK_FLAG_2,
+                        WrapMode = TextureWrapMode.repeatX | TextureWrapMode.repeatY | TextureWrapMode.unk6 | TextureWrapMode.unk7,
+                        LodBias = -10,
+                        AnisotropicFilter = GXAnisotropy.GX_ANISO_4,
+                        Unk0x0C = 0,
+                        Unk0x12 = TexFlags0x10.unk4 | TexFlags0x10.unk5,
+                    },
+                };
+                var textureHashes = new string[]
+                {
+                    "0c9d37cef4fe0c1d19e376a5c2e9ae64", // st27 tex 92
+                };
+                var material = new Material
+                {
+                    MaterialColor = new GXColor(0xffffffff),
+                    AmbientColor = new GXColor(0xf8f8f8ff),
+                    SpecularColor = new GXColor(0x00000000),
+                    Unk0x10 = 0,
+                    Alpha = 255,
+                    Unk0x15 = 0,
+                };
+                var submesh = new Submesh()
+                {
+                    RenderFlags = RenderFlags.unlit | RenderFlags.doubleSidedFaces,
+                    Material = material,
+                    UnkAlphaOptions = new UnkAlphaOptions(),
+                };
+                var template = new GcmfTemplate()
+                {
+                    Name = baseName + nameof(RoadRail),
+                    IsTranslucid = false,
+                    Submesh = submesh,
+                    TevLayers = tevLayers,
+                    TextureHashes = textureHashes,
+                };
+
+                return template;
+            }
+
+            public static GcmfTemplate RoadTopAlt()
+            {
+                // ST27 road15 submesh 5, tevs 6
+                var tevLayers = new TevLayer[]
+                {
+                    new TevLayer()
+                    {
+                        MipmapSetting = MipmapSetting.ENABLE_MIPMAP | MipmapSetting.UNK_FLAG_1 | MipmapSetting.UNK_FLAG_2,
+                        WrapMode = TextureWrapMode.mirrorX | TextureWrapMode.repeatY | TextureWrapMode.unk6 | TextureWrapMode.unk7,
+                        LodBias = -10,
+                        AnisotropicFilter = GXAnisotropy.GX_ANISO_4,
+                        Unk0x12 = TexFlags0x10.unk4 | TexFlags0x10.unk5,
+                    },
+                };
+                var textureHashes = new string[]
+                {
+                    "c38a03d5e66cbfdf4f38602a0be7eb6b", // st27 tex 96
+                };
+                var material = new Material
+                {
+                    MaterialColor = new GXColor(0xb2b2b2ff),
+                    AmbientColor = new GXColor(0x7f7f7fff),
+                    SpecularColor = new GXColor(0x00000000),
+                    Unk0x10 = 0,
+                    Alpha = 255,
+                    UnkAlpha0x14 = -1,
+                };
+                var submesh = new Submesh()
+                {
+                    RenderFlags = 0,
+                    Material = material,
+                    UnkAlphaOptions = new UnkAlphaOptions(),
+                };
+                var template = new GcmfTemplate()
+                {
+                    Name = baseName + nameof(RoadTopAlt),
+                    IsTranslucid = false,
+                    Submesh = submesh,
+                    TevLayers = tevLayers,
+                    TextureHashes = textureHashes,
+                    TextureScrollFields = null,
+                };
+
+                return template;
+            }
+
+
+            public static GcmfTemplate RoadRailAlt()
+            {
+                // guardrail15 submesh 0, tevs 0, 1
+                var tevLayers = new TevLayer[]
+                {
+                    new TevLayer()
+                    {
+                        Unk0x00 = 0,
+                        MipmapSetting = MipmapSetting.ENABLE_MIPMAP | MipmapSetting.UNK_FLAG_1 | MipmapSetting.UNK_FLAG_2,
+                        WrapMode = TextureWrapMode.mirrorX | TextureWrapMode.repeatY | TextureWrapMode.unk6 | TextureWrapMode.unk7,
+                        LodBias = -10,
+                        AnisotropicFilter = GXAnisotropy.GX_ANISO_4,
+                        Unk0x0C = 235,
+                        Unk0x12 = TexFlags0x10.unk4 | TexFlags0x10.unk5,
+                    },
+                    new TevLayer()
+                    {
+                        Unk0x00 = 0,
+                        MipmapSetting = MipmapSetting.ENABLE_MIPMAP | MipmapSetting.UNK_FLAG_1 | MipmapSetting.UNK_FLAG_2 | MipmapSetting.Unk5_AlphaMultiply,
+                        WrapMode = TextureWrapMode.mirrorX | TextureWrapMode.repeatY | TextureWrapMode.unk6 | TextureWrapMode.unk7,
+                        LodBias = -10,
+                        AnisotropicFilter = GXAnisotropy.GX_ANISO_4,
+                        Unk0x0C = 178,
+                        Unk0x12 = TexFlags0x10.unk4 | TexFlags0x10.unk5,
+                    },
+                };
+                var textureHashes = new string[]
+                {
+                    "ad9b358d4048707824a307d6b954f51e", // st27 tex 102
+                    "7032fb43cd18140a801273942c710428", // st27 tex 103
+
+                };
+                var material = new Material
+                {
+                    MaterialColor = new GXColor(0xffffffff),
+                    AmbientColor = new GXColor(0xf8f8f8ff),
+                    SpecularColor = new GXColor(0x00000000),
+                    Unk0x10 = 0,
+                    Alpha = 255,
+                    Unk0x15 = 0,
+                };
+                var submesh = new Submesh()
+                {
+                    RenderFlags = RenderFlags.unlit | RenderFlags.doubleSidedFaces,
+                    Material = material,
+                    UnkAlphaOptions = new UnkAlphaOptions(),
+                };
+                var template = new GcmfTemplate()
+                {
+                    Name = baseName + nameof(RoadRailAlt),
+                    IsTranslucid = false,
+                    Submesh = submesh,
+                    TevLayers = tevLayers,
+                    TextureHashes = textureHashes,
+                };
+
+                return template;
+            }
+
+            public static GcmfTemplate CurbSlopeAlt()
+            {
+                // ST27 road15 submesh 4, tevs 4, 5
+                var tevLayers = new TevLayer[]
+                {
+                    new TevLayer()
+                    {
+                        MipmapSetting = MipmapSetting.ENABLE_MIPMAP | MipmapSetting.UNK_FLAG_1 | MipmapSetting.UNK_FLAG_2,
+                        WrapMode = TextureWrapMode.repeatY | TextureWrapMode.unk6 | TextureWrapMode.unk7,
+                        LodBias = -10,
+                        AnisotropicFilter = GXAnisotropy.GX_ANISO_4,
+                        Unk0x0C = 52,
+                        Unk0x12 = TexFlags0x10.unk4 | TexFlags0x10.unk5,
+                    },
+                    new TevLayer()
+                    {
+                        MipmapSetting = MipmapSetting.ENABLE_MIPMAP | MipmapSetting.UNK_FLAG_1 | MipmapSetting.UNK_FLAG_2,
+                        WrapMode = TextureWrapMode.mirrorX | TextureWrapMode.mirrorY | TextureWrapMode.unk7,
+                        LodBias = 0,
+                        AnisotropicFilter = GXAnisotropy.GX_ANISO_1,
+                        Unk0x0C = 136,
+                        Unk0x12 = TexFlags0x10.unk0_AlphaScreenSelf |TexFlags0x10.unk4 | TexFlags0x10.unk5,
+                    },
+                };
+                var textureHashes = new string[]
+                {
+                    "5db8a089636b01ef223e0021ecbdfb75", // st27 tex 100
+                    "b978ad119120a4cadd428707eefc2a5e", // st27 tex 107
+                };
+                var material = new Material
+                {
+                    MaterialColor = new GXColor(0xb2b2b2ff),
+                    AmbientColor = new GXColor(0x7f7f7fff),
+                    SpecularColor = new GXColor(0x00000000),
+                    Unk0x10 = MatFlags0x10.unk1 | MatFlags0x10.unk3 | MatFlags0x10.unk5,
+                    Alpha = 255,
+                    UnkAlpha0x14 = -1,
+                };
+                var submesh = new Submesh()
+                {
+                    RenderFlags = 0,
+                    Material = material,
+                    UnkAlphaOptions = new UnkAlphaOptions(),
+                };
+                var template = new GcmfTemplate()
+                {
+                    Name = baseName + nameof(CurbSlopeAlt),
+                    IsTranslucid = false,
+                    Submesh = submesh,
+                    TevLayers = tevLayers,
+                    TextureHashes = textureHashes,
+                    TextureScrollFields = null,
+                };
+
+                return template;
+            }
+
+            public static GcmfTemplate CurbTopAlt()
+            {
+                // ST27 road15 submesh 0, tevs 0
+                var tevLayers = new TevLayer[]
+                {
+                    new TevLayer()
+                    {
+                        MipmapSetting = MipmapSetting.ENABLE_MIPMAP | MipmapSetting.UNK_FLAG_1 | MipmapSetting.UNK_FLAG_2,
+                        WrapMode = TextureWrapMode.repeatX | TextureWrapMode.unk6 | TextureWrapMode.unk7,
+                        LodBias = -10,
+                        AnisotropicFilter = GXAnisotropy.GX_ANISO_4,
+                        Unk0x12 = TexFlags0x10.unk4 | TexFlags0x10.unk5,
+                    },
+                };
+                var textureHashes = new string[]
+                {
+                    "eca4e30836026da1985b293c5a3850ad", // st27 tex 101
+                };
+                var material = new Material
+                {
+                    MaterialColor = new GXColor(0xb2b2b2ff),
+                    AmbientColor = new GXColor(0x7f7f7fff),
+                    SpecularColor = new GXColor(0x00000000),
+                    Unk0x10 = 0,
+                    Alpha = 255,
+                    UnkAlpha0x14 = -1,
+                };
+                var submesh = new Submesh()
+                {
+                    RenderFlags = 0,
+                    Material = material,
+                    UnkAlphaOptions = new UnkAlphaOptions(),
+                };
+                var template = new GcmfTemplate()
+                {
+                    Name = baseName + nameof(CurbTopAlt),
+                    IsTranslucid = false,
+                    Submesh = submesh,
+                    TevLayers = tevLayers,
+                    TextureHashes = textureHashes,
+                    TextureScrollFields = null,
+                };
+
+                return template;
+            }
 
         }
 

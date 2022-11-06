@@ -11,5 +11,11 @@
         PortTown = 4,
         PortTownAlt = 5,
 
+        BigBlue = 6,
+        BigBlueAlt = 7,
+        //BigBlueTunnel = 8,
+
+        //FireField = 9,
+
     }
 }
