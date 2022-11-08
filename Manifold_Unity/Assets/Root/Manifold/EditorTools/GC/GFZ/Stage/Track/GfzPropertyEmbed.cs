@@ -28,7 +28,8 @@ namespace Manifold.EditorTools.GC.GFZ.Stage.Track
 
 
         public override ShapeID ShapeIdentifier => ShapeID.embed;
-
+        public override EndcapMode EndcapModeIn => throw new System.ArgumentException();
+        public override EndcapMode EndcapModeOut => throw new System.ArgumentException();
 
         public SurfaceEmbedType Type { get => type; }
         public int WidthDivisions { get => widthDivisions; }
@@ -236,10 +237,27 @@ namespace Manifold.EditorTools.GC.GFZ.Stage.Track
             matrices = TristripGenerator.StripHeight(matrices);
             // Inset scale so that trim of embeds does not "overflow" collision area
             var insetMatrices = TristripGenerator.ModifyMatrixScales(matrices, new Vector3(-2f * (TristripTemplates.General.kTrimOffset + 0.05f),0,0));
-            // Matriuces of parent, sometimes required for positioning, etc.
+            // Matrices of parent, sometimes required for positioning, etc.
             var parent = GetParent();
             var parentMatrices = TristripGenerator.CreatePathMatrices(parent, isGfzCoordinateSpace, lengthDistance, min, max);
 
+            // Inset endcaps if endcap is present. To do this, inset the matrix itself.
+            float inset = TristripTemplates.General.kTrimOffset;
+            if (IncludeTrimStart)
+            {
+                var matrix = insetMatrices[0];
+                var offset = matrix.rotation * TristripGenerator.Forward(isGfzCoordinateSpace) * inset;
+                matrix = Matrix4x4.TRS(matrix.GetPosition() + offset, matrix.rotation, matrix.lossyScale);
+                insetMatrices[0] = matrix;
+            }
+            if (IncludeTrimEnd)
+            {
+                int index = matrices.Length - 1;
+                var matrix = insetMatrices[index];
+                var offset = matrix.rotation * TristripGenerator.Back(isGfzCoordinateSpace) * inset;
+                matrix = Matrix4x4.TRS(matrix.GetPosition() + offset, matrix.rotation, matrix.lossyScale);
+                insetMatrices[index] = matrix;
+            }
 
             switch (type)
             {
@@ -298,30 +316,6 @@ namespace Manifold.EditorTools.GC.GFZ.Stage.Track
             }
         }
 
-
-        //public override Mesh CreateMesh(out int[] materialsCount)
-        //{
-        //    var hacTRS = CreateHierarchichalAnimationCurveTRS(false);
-        //    var maxTime = hacTRS.GetRootMaxTime();
-        //    var min = from * maxTime;
-        //    var max = to * maxTime;
-        //    //Debug.Log($"MeshUnity -- Min: {min}, Max: {max}, MaxTime: {maxTime}");
-        //    var matrices = TristripGenerator.GenerateMatrixIntervals(hacTRS, lengthDistance, min, max);
-
-        //    //
-        //    var endpointA = new Vector3(-0.5f, 0.33f, 0f);
-        //    var endpointB = new Vector3(+0.5f, 0.33f, 0f);
-        //    var color0 = GetColor(type);
-        //    var tristrips = TristripGenerator.CreateTristrips(matrices, endpointA, endpointB, widthDivisions, color0, Vector3.up, 0, true);
-        //    var mesh = TristripsToMesh(tristrips);
-        //    materialsCount = new int[1]; // TODO:
-        //    //var tristrips = GetTristrips(Type, false);
-        //    //var mesh = TristripsToMesh(Tristrip.Linearize(tristrips));
-        //    mesh.name = $"Auto Gen - {this.name}";
-
-        //    return mesh;
-        //}
-
         public override TrackSegment CreateTrackSegment()
         {
             //var children = CreateChildTrackSegments();
@@ -341,6 +335,7 @@ namespace Manifold.EditorTools.GC.GFZ.Stage.Track
         public override void UpdateTRS()
         {
             animationCurveTRS = CopyAnimationCurveTRS(false);
+            RenormalizedCurves();
         }
 
         public void SetOffsets(Jusification jusification)
@@ -376,5 +371,16 @@ namespace Manifold.EditorTools.GC.GFZ.Stage.Track
                 default: throw new System.NotImplementedException();
             }
         }
+
+
+        public void RenormalizedCurves()
+        {
+            var maxTime = GetRoot().GetMaxTime();
+            var widthKeys = widthCurve.GetRenormalizedKeyRangeAndTangents(0, maxTime);
+            var offsetKeys = offsetCurve.GetRenormalizedKeyRangeAndTangents(0, maxTime);
+            widthCurve = new UnityEngine.AnimationCurve(widthKeys);
+            offsetCurve = new UnityEngine.AnimationCurve(offsetKeys);
+        }
+
     }
 }
