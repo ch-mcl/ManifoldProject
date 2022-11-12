@@ -234,7 +234,7 @@ namespace Manifold.EditorTools.GC.GFZ.Stage.Track
             public static string LaneDivider() => CreateMaterial(shadergraph_mt_r_1Tex, GcmfTemplates.PortTown.LaneDivider());
             public static string RoadBottom() => CreateMaterial(shadergraph_mt_m_1Tex, GcmfTemplates.MuteCity.RoadBottom());
             public static string RoadRails() => CreateMaterial(shadergraph_mt_r_1Tex, GcmfTemplates.PortTown.RoadRail());
-            public static string RoadCrubs() => CreateMaterial(shadergraph_mt_m_1Tex, GcmfTemplates.MuteCity.RoadSides()); // Crub top and side
+            public static string RoadCrubs() => CreateMaterial(shadergraph_mt_m_1Tex, GcmfTemplates.PortTown.CurbTopSide(true));
             public static string RoadSide() => CreateMaterial(shadergraph_mt_r_1Tex, GcmfTemplates.PortTown.RoadSide(false));
             public static string EndCap() => CreateMaterial(shadergraph_mt_r_1Tex, GcmfTemplates.PortTown.RoadSideEndCap(false));
         }
@@ -256,7 +256,7 @@ namespace Manifold.EditorTools.GC.GFZ.Stage.Track
             public static string CurbSlope() => CreateMaterial(shadergraph_mt_r_1Tex, GcmfTemplates.PortTown.CurbSlope(true));
             public static string LaneDivider() => CreateMaterial(shadergraph_mt_r_1Tex, GcmfTemplates.PortTown.LaneDivider());
             public static string RoadRails() => CreateMaterial(shadergraph_mt_r_1Tex, GcmfTemplates.PortTown.RoadRail());
-            public static string RoadCrubs() => CreateMaterial(shadergraph_mt_m_1Tex, GcmfTemplates.MuteCity.RoadSides()); // Crub top and side
+            public static string RoadCrubs() => CreateMaterial(shadergraph_mt_m_1Tex, GcmfTemplates.PortTown.CurbTopSide(true));
             public static string RoadSide() => CreateMaterial(shadergraph_mt_r_1Tex, GcmfTemplates.PortTown.RoadSide(true));
             public static string EndCap() => CreateMaterial(shadergraph_mt_r_1Tex, GcmfTemplates.PortTown.RoadSideEndCap(true));
             public static string RoadBottom() => CreateMaterial(shadergraph_mt_m_1Tex, GcmfTemplates.PortTown.TransRoadBottom());

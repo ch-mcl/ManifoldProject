@@ -656,7 +656,55 @@ namespace Manifold.EditorTools.GC.GFZ
             }
             public static GcmfTemplate RecoverLightAlpha() => RecoverDarkAlpha();
 
-            public static GcmfTemplate Trim() => MuteCity.RoadSides();
+            public static GcmfTemplate Trim() => Curb(false);
+            public static GcmfTemplate Curb(bool isDoubleSided)
+            {
+                var tevLayers = new TevLayer[]
+                {
+                    new TevLayer()
+                    {
+                        Unk0x00 = 0,
+                        MipmapSetting = MipmapSetting.ENABLE_MIPMAP | MipmapSetting.UNK_FLAG_1 | MipmapSetting.UNK_FLAG_2,
+                        WrapMode = TextureWrapMode.repeatY | TextureWrapMode.unk6 | TextureWrapMode.unk7,
+                        LodBias = -10,
+                        AnisotropicFilter = GXAnisotropy.GX_ANISO_4,
+                        Unk0x0C = 0,
+                        Unk0x12 = TexFlags0x10.unk4 | TexFlags0x10.unk5,
+                    },
+                };
+                var textureHashes = new string[]
+                {
+                    "d34923c1e44fa9bd58283b123b4a708a", // st01 tex 10
+                };
+                var material = new Material
+                {
+                    MaterialColor = new GXColor(0xb2b2b2ff),
+                    AmbientColor = new GXColor(0x7f7f7fff),
+                    SpecularColor = new GXColor(0xFFFFFFFF),
+                    Unk0x10 = MatFlags0x10.unk1 | MatFlags0x10.unk3 | MatFlags0x10.unk5,
+                    Alpha = 255,
+                    UnkAlpha0x14 = -1,
+                    Unk0x15 = 0,
+                };
+                var submesh = new Submesh()
+                {
+                    RenderFlags = isDoubleSided ? RenderFlags.doubleSidedFaces : 0,
+                    Material = material,
+                    UnkAlphaOptions = new UnkAlphaOptions(),
+                };
+                var template = new GcmfTemplate()
+                {
+                    Name = nameof(Curb),
+                    IsTranslucid = false,
+                    Submesh = submesh,
+                    TevLayers = tevLayers,
+                    TextureHashes = textureHashes,
+                    TextureScrollFields = null,
+                };
+
+                Assert.IsTrue(textureHashes.Length == tevLayers.Length);
+                return template;
+            }
         }
 
         public static class MuteCity
@@ -841,55 +889,7 @@ namespace Manifold.EditorTools.GC.GFZ
                 Assert.IsTrue(textureHashes.Length == tevLayers.Length);
                 return template;
             }
-            // TODO: generic
-            public static GcmfTemplate RoadSides()
-            {
-                var tevLayers = new TevLayer[]
-                {
-                    new TevLayer()
-                    {
-                        Unk0x00 = 0,
-                        MipmapSetting = MipmapSetting.ENABLE_MIPMAP | MipmapSetting.UNK_FLAG_1 | MipmapSetting.UNK_FLAG_2,
-                        WrapMode = TextureWrapMode.repeatY | TextureWrapMode.unk6 | TextureWrapMode.unk7,
-                        LodBias = -10,
-                        AnisotropicFilter = GXAnisotropy.GX_ANISO_4,
-                        Unk0x0C = 0,
-                        Unk0x12 = TexFlags0x10.unk4 | TexFlags0x10.unk5,
-                    },
-                };
-                var textureHashes = new string[]
-                {
-                    "d34923c1e44fa9bd58283b123b4a708a", // st01 tex 10
-                };
-                var material = new Material
-                {
-                    MaterialColor = new GXColor(0xb2b2b2ff),
-                    AmbientColor = new GXColor(0x7f7f7fff),
-                    SpecularColor = new GXColor(0xFFFFFFFF),
-                    Unk0x10 = MatFlags0x10.unk1 | MatFlags0x10.unk3 | MatFlags0x10.unk5,
-                    Alpha = 255,
-                    UnkAlpha0x14 = -1,
-                    Unk0x15 = 0,
-                };
-                var submesh = new Submesh()
-                {
-                    RenderFlags = 0,
-                    Material = material,
-                    UnkAlphaOptions = new UnkAlphaOptions(),
-                };
-                var template = new GcmfTemplate()
-                {
-                    Name = baseName + nameof(RoadSides),
-                    IsTranslucid = false,
-                    Submesh = submesh,
-                    TevLayers = tevLayers,
-                    TextureHashes = textureHashes,
-                    TextureScrollFields = null,
-                };
-
-                Assert.IsTrue(textureHashes.Length == tevLayers.Length);
-                return template;
-            }
+            public static GcmfTemplate RoadSides() => General.Curb(false);
             public static GcmfTemplate RoadEmbelishments()
             {
                 var tevLayers = new TevLayer[]
@@ -2119,6 +2119,8 @@ namespace Manifold.EditorTools.GC.GFZ
 
                 return template;
             }
+
+            public static GcmfTemplate CurbTopSide(bool isDoubleSided) => General.Curb(isDoubleSided);
 
             public static GcmfTemplate RoadSide(bool isTransparent)
             {
