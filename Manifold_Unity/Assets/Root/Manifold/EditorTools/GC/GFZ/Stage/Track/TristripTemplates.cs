@@ -1206,7 +1206,7 @@ namespace Manifold.EditorTools.GC.GFZ
                 /*MuteCity.Bottom(matrices, road, segmentLength);*/
 
                 public static Tristrip[] CrubSlant(Matrix4x4[] matrices, GfzShapeRoad road, float segmentLength, bool isGfzCoordinate, bool isAlt) {
-                    var tristrips = MuteCity.TrimTex0(matrices, road, segmentLength, isGfzCoordinate);
+                    var tristrips = MuteCity.LightTex1(matrices, segmentLength);
                     if (isAlt) {
                         for (int i = 0; i < tristrips.Length; i++)
                         {
