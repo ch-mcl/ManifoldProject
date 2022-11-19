@@ -1143,18 +1143,17 @@ namespace Manifold.EditorTools.GC.GFZ
 
             public static class BigBlue
             {
-                public const float RoadTexStride = 32f;
-                public const float kLengthTrim = RoadTexStride * 2;
-                public const float kLengthRoadTop = RoadTexStride;
-                public const float kLengthRoadBottom = RoadTexStride;
-                public const float kLengthRoadSides = RoadTexStride;
+                public const float kLengthTrim = TexStrideRoad * 2;
+                public const float kLengthRoadTop = TexStrideRoad;
+                public const float kLengthRoadBottom = TexStrideRoad;
+                public const float kLengthRoadSides = TexStrideRoad;
                 public const float kTrackThickness = 2f;
 
                 public const float kInsetTop = kCurbSlantInner;
 
 
-                public const float kLengthRail = RoadTexStride * 2;
-                public const float kEndCapTexStride = RoadTexStride;
+                public const float kLengthRail = TexStrideRoad * 2;
+                public const float kEndCapTexStride = TexStrideRoad;
                 public const float kEndCapTexHeight = 1f;
 
                 private static Tristrip[] CreateRailwithUV(Matrix4x4[] matrices, float height, float repetitionsRoadTexture, bool isLeftSide, bool isAlt)
@@ -1184,26 +1183,9 @@ namespace Manifold.EditorTools.GC.GFZ
 
                 public static Tristrip[] RoadTop(Matrix4x4[] matrices, GfzShapeRoad road, float segmentLength)
                     => TopTex0(matrices, road.WidthDivisions, kInsetTop, 4, GetTexRepetitions(segmentLength, kLengthRoadTop));
-                //{
-                //    var tristrips = StandardTop(matrices, road.WidthDivisions);
-
-                //    float repetitionsRoadTexture = math.ceil(segmentLength / kLengthTrim);
-                //    var uvs = CreateTristripScaledUVs(tristrips, road.TexRepeatWidthTop, repetitionsRoadTexture);
-                //    for (int i = 0; i < tristrips.Length; i++)
-                //    {
-                //        tristrips[i].tex0 = uvs[i];
-                //        if (road.hasLaneDividers)
-                //        {
-                //            tristrips[i].tex1 = uvs[i];
-                //        }
-                //    }
-
-                //    return tristrips;
-                //}
 
                 public static Tristrip[] RoadBottom(Matrix4x4[] matrices, GfzShapeRoad road, float segmentLength)
                     => BottomTex0(matrices, road.WidthDivisions, 0, 1, segmentLength, 4, kLengthRoadTop);
-                /*MuteCity.Bottom(matrices, road, segmentLength);*/
 
                 public static Tristrip[] CrubSlant(Matrix4x4[] matrices, GfzShapeRoad road, float segmentLength, bool isGfzCoordinate, bool isAlt) {
                     var tristrips = MuteCity.LightTex1(matrices, segmentLength);
@@ -1613,18 +1595,17 @@ namespace Manifold.EditorTools.GC.GFZ
 
             public static class PortTown
             {
-                public const float RoadTexStride = 32f;
-                public const float kLengthTrim = RoadTexStride;
-                public const float kLengthRoadTop = RoadTexStride;
-                public const float kLengthRoadBottom = RoadTexStride;
-                public const float kLengthRoadSides = RoadTexStride;
+                public const float kLengthTrim = TexStrideRoad;
+                public const float kLengthRoadTop = TexStrideRoad;
+                public const float kLengthRoadBottom = TexStrideRoad;
+                public const float kLengthRoadSides = TexStrideRoad;
                 public const float kTrackThickness = 11f;
                 public const float kInsetTop = kCurbSlantInner;
                 public const float kSideInset = 5.5f;
 
 
-                public const float kLengthRail = RoadTexStride;
-                public const float kEndCapTexStride = RoadTexStride;
+                public const float kLengthRail = TexStrideRoad;
+                public const float kEndCapTexStride = TexStrideRoad;
                 public const float kEndCapTexHeight = 1f;
 
                 public const float kTexRepeat = 1f/*3f*/;
