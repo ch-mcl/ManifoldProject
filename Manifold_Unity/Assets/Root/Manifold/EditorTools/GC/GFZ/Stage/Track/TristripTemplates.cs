@@ -1629,23 +1629,25 @@ namespace Manifold.EditorTools.GC.GFZ
                     return tristrips;
                 }
 
-                public static Tristrip[] RoadTop(Matrix4x4[] matrices, GfzShapeRoad road, float segmentLength, bool isAlt)
+                public static Tristrip[] RoadTop(Matrix4x4[] matrices, GfzShapeRoad road, float segmentLength)
                 {
-                    var tristrips = StandardTop(matrices, road.WidthDivisions);
+                    var tristrips = TopTex0(matrices, road.WidthDivisions, kInsetTop, 12, GetTexRepetitions(segmentLength, kLengthRoadTop));
 
-                    float repetitionsRoadTexture = math.ceil(segmentLength / kLengthTrim);
-                    var uvs = CreateTristripScaledUVs(tristrips, road.TexRepeatWidthTop * kTexRepeat, repetitionsRoadTexture);
-                    if (!isAlt)
-                        uvs = OffsetUV(uvs, new Vector2(0, -1));
-                    for (int i = 0; i < tristrips.Length; i++)
-                    {
-                        tristrips[i].tex0 = uvs[i];
-                        if (isAlt) {
-                            tristrips[i].tex1 = uvs[i];
-                            tristrips[i].isDoubleSided = true;
-                        }
+                    for (int i = 0; i < tristrips.Length; i++) {
+                        tristrips[i].tex0 = OffsetUV(tristrips[i].tex0, new Vector2(0, -1));
                     }
 
+                    return tristrips;
+                }
+
+                public static Tristrip[] RoadTopAlt(Matrix4x4[] matrices, GfzShapeRoad road, float segmentLength)
+                {
+                    float repetitions = GetTexRepetitions(segmentLength, kLengthRoadTop);
+                    var tristrips = TopTex1(matrices, road.WidthDivisions, kInsetTop, 12, 12, repetitions, repetitions);
+
+                    for (int i = 0; i < tristrips.Length; i++) {
+                        tristrips[i].isDoubleSided = true;
+                    }
                     return tristrips;
                 }
 

@@ -151,7 +151,7 @@ namespace Manifold.EditorTools.GC.GFZ.Stage.Track
                 case RoadMeshStyle.PortTown:
                     return new Tristrip[][]
                     {
-                        TristripTemplates.Road.PortTown.RoadTop(matrices, this, maxTime, false),
+                        TristripTemplates.Road.PortTown.RoadTop(matrices, this, maxTime),
                         TristripTemplates.Road.PortTown.CurbSlant(matrices, this, maxTime, false),
                         TristripTemplates.Road.PortTown.LaneDividers(matrices, this, maxTime),
                         TristripTemplates.Road.PortTown.RoadBottom(matrices, this, maxTime, false),
@@ -170,7 +170,7 @@ namespace Manifold.EditorTools.GC.GFZ.Stage.Track
                         TristripTemplates.Road.PortTown.RoadSideLow(matrices, this, maxTime, true),
                         TristripTemplates.Road.PortTown.EndCaps(matrices, this, maxTime, true),
                         TristripTemplates.Road.PortTown.RoadBottom(matrices, this, maxTime, true),
-                        TristripTemplates.Road.PortTown.RoadTop(matrices, this, maxTime, true),
+                        TristripTemplates.Road.PortTown.RoadTopAlt(matrices, this, maxTime),
                     };
                 case RoadMeshStyle.BigBlue:
                     return new Tristrip[][]
